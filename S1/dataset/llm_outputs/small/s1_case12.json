@@ -1,0 +1,53 @@
+[
+  {
+    "command": "move",
+    "from": {
+      "type": "shelf",
+      "id": "ShelfA.mid.slot2"
+    },
+    "to": {
+      "type": "bin",
+      "id": "RedBin.back.slot0"
+    }
+  },
+  {
+    "command": "pick",
+    "from": {
+      "type": "worktable",
+      "id": "Worktable.left.slot1"
+    },
+    "to": {}
+  },
+  {
+    "command": "pick",
+    "from": {
+      "type": "worktable",
+      "id": "Worktable.left.slot1"
+    },
+    "to": {}
+  },
+  {
+    "command": "place",
+    "from": {
+      "type": "worktable",
+      "id": "Worktable.left.slot1"
+    },
+    "to": {}
+  },
+  {
+    "command": "pick",
+    "from": {
+      "type": "worktable",
+      "id": "Worktable.left.slot1"
+    },
+    "to": {}
+  },
+  {
+    "command": "place",
+    "from": {
+      "type": "worktable",
+      "id": "Worktable.left.slot1"
+    },
+    "to": {}
+  }
+]

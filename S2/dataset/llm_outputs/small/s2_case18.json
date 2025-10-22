@@ -1,0 +1,56 @@
+{
+  "robots": [
+    {
+      "agent": "RobotA",
+      "object": "ShelfA.red.slot",
+      "plan": [
+        {
+          "step": [
+            {
+              "type": "move",
+              "target": "RedBin.slot"
+            },
+            {
+              "type": "pick",
+              "object": "ShelfA.red.slot"
+            }
+          ]
+        },
+        {
+          "step": [
+            {
+              "type": "place",
+              "object": "RedBin.slot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "agent": "RobotB",
+      "object": "ShelfA.blue.slot",
+      "plan": [
+        {
+          "step": [
+            {
+              "type": "move",
+              "target": "BlueBin.slot"
+            },
+            {
+              "type": "pick",
+              "object": "ShelfA.blue.slot"
+            }
+          ]
+        },
+        {
+          "step": [
+            {
+              "type": "place",
+              "object": "BlueBin_slot"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

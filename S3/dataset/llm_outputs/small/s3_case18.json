@@ -1,0 +1,80 @@
+{
+  "case_id": "s3_case18",
+  "model": "llama3.2:1b",
+  "steps": [
+    {
+      "agent": "robotA",
+      "action": "arm.pick",
+      "object": "redbox",
+      "from": "ShelfA.red.slot"
+    },
+    {
+      "agent": "robotA",
+      "action": "base.goto",
+      "target": "Inspection.dock"
+    },
+    {
+      "agent": "robotA",
+      "action": "arm.place",
+      "object": "redbox",
+      "to": "Inspection.slot"
+    },
+    {
+      "agent": "robotB",
+      "action": "arm.pick",
+      "object": "bluebox",
+      "from": "ShelfA.blue.slot"
+    },
+    {
+      "agent": "robotB",
+      "action": "base.wait",
+      "reason": "Inspection occupied"
+    },
+    {
+      "agent": "robotA",
+      "action": "arm.pick",
+      "object": "redbox",
+      "from": "Inspection.slot"
+    },
+    {
+      "agent": "robotA",
+      "action": "base.goto",
+      "target": "RedBin.dock"
+    },
+    {
+      "agent": "robotA",
+      "action": "arm.place",
+      "object": "redbox",
+      "to": "RedBin.slot"
+    },
+    {
+      "agent": "robotB",
+      "action": "base.goto",
+      "target": "Inspection.dock"
+    },
+    {
+      "agent": "robotB",
+      "action": "arm.place",
+      "object": "bluebox",
+      "to": "Inspection.slot"
+    },
+    {
+      "agent": "robotB",
+      "action": "arm.pick",
+      "object": "bluebox",
+      "from": "Inspection.slot"
+    },
+    {
+      "agent": "robotB",
+      "action": "base.goto",
+      "target": "BlueBin.dock"
+    },
+    {
+      "agent": "robotB",
+      "action": "arm.place",
+      "object": "bluebox",
+      "to": "BlueBin.slot"
+    }
+  ],
+  "notes": "Simulated LLM output with cooperative inspection logic"
+}

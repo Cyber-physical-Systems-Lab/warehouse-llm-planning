@@ -1,0 +1,37 @@
+[
+  {
+    "step": 0,
+    "instruction": "base.goto",
+    "target": "ShelfA.bottom.slot3"
+  },
+  {
+    "step": 1,
+    "instruction": "arm.pick",
+    "target": "ShelfA.bottom.slot3"
+  },
+  {
+    "step": 2,
+    "instruction": "base.goto",
+    "target": "Worktable.left.slot1"
+  },
+  {
+    "step": 3,
+    "instruction": "arm.place",
+    "target": "RedBin.back.slot0"
+  },
+  {
+    "step": 4,
+    "instruction": "base.goto",
+    "target": "RedBin.back.slot0"
+  },
+  {
+    "step": 5,
+    "instruction": "arm.pick",
+    "target": "RedBin.back.slot0"
+  },
+  {
+    "step": 6,
+    "instruction": "arm.place",
+    "target": "RedBin.back.slot0"
+  }
+]

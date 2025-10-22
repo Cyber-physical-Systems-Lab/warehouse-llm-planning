@@ -1,0 +1,10 @@
+[
+  {
+    "base": "ShelfA.mid.slot2",
+    "arm": {
+      "pick": true,
+      "place": false
+    },
+    "dock": "RedBin.front_slot0"
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "robots": [
+    {
+      "id": 1,
+      "name": "RobotA",
+      "step": {
+        "agent": "move",
+        "object": "RedBox.RedSlot",
+        "correct_target": "RedBin.RedSlot"
+      }
+    },
+    {
+      "id": 2,
+      "name": "RobotB",
+      "step": {
+        "agent": "move",
+        "object": "BlueBox.BlueSlot",
+        "correct_target": "BlueBin.BlueSlot"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "robot_id": 1,
+      "step": {
+        "agent": "move",
+        "object": "RedBox.RedSlot",
+        "correct_target": "RedBin.RedSlot"
+      },
+      "time": 0
+    },
+    {
+      "robot_id": 2,
+      "step": {
+        "agent": "move",
+        "object": "BlueBox.BlueSlot",
+        "correct_target": "BlueBin.BlueSlot"
+      },
+      "time": 0
+    }
+  ]
+}

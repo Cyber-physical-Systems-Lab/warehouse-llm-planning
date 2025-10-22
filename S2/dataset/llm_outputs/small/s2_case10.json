@@ -1,0 +1,90 @@
+{
+  "agents": [
+    {
+      "name": "RobotA",
+      "type": "robot",
+      "plan": [
+        {
+          "agent": "ShelfA.red.slot",
+          "object": "RedBox",
+          "target": "RedBin.slot"
+        },
+        {
+          "agent": "ShelfA.blue.slot",
+          "object": "BlueBox",
+          "target": "BlueBin_slot"
+        }
+      ]
+    },
+    {
+      "name": "RobotB",
+      "type": "robot",
+      "plan": [
+        {
+          "agent": "ShelfA.red.slot",
+          "object": "RedBox",
+          "target": "RedBin_slot"
+        },
+        {
+          "agent": "ShelfA.blue.slot",
+          "object": "BlueBox",
+          "target": "BlueBin_slot"
+        }
+      ]
+    }
+  ],
+  "steps": [
+    [
+      "ShelfA.red.slot",
+      "arm.pick"
+    ],
+    [
+      "ShelfA.red.slot",
+      "move"
+    ],
+    [
+      "RedBox",
+      "pick"
+    ],
+    [
+      "RedBox",
+      "move"
+    ],
+    [
+      "RobotA",
+      "base.goto",
+      "RedBin_slot"
+    ],
+    [
+      "RobotA",
+      "arm.pick"
+    ],
+    [
+      "RobotA",
+      "move"
+    ],
+    [
+      "RobotB",
+      "ShelfA.blue.slot",
+      "arm.pick"
+    ],
+    [
+      "RobotB",
+      "ShelfA.blue.slot",
+      "move"
+    ],
+    [
+      "BlueBox",
+      "pick"
+    ],
+    [
+      "BlueBox",
+      "move"
+    ],
+    [
+      "RobotB",
+      "base.goto",
+      "BlueBin_slot"
+    ]
+  ]
+}

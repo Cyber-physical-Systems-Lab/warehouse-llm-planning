@@ -1,0 +1,52 @@
+{
+  "agents": [
+    {
+      "id": "RobotA",
+      "name": "RobotA",
+      "plan": {
+        "steps": [
+          {
+            "agent": "RobotA",
+            "object": "ShelfA.red.slot",
+            "correct_target": "RedBin.slot"
+          },
+          {
+            "agent": "RobotB",
+            "object": "ShelfA.blue.slot",
+            "correct_target": "BlueBin_slot"
+          }
+        ]
+      }
+    },
+    {
+      "id": "RobotB",
+      "name": "RobotB",
+      "plan": {
+        "steps": [
+          {
+            "agent": "RobotB",
+            "object": "ShelfA.red.slot",
+            "correct_target": "RedBin_slot"
+          },
+          {
+            "agent": "RobotA",
+            "object": "ShelfA.blue.slot",
+            "correct_target": "BlueBin_slot"
+          }
+        ]
+      }
+    }
+  ],
+  "steps": [
+    {
+      "agent": "RobotA",
+      "object": "ShelfA.red.slot",
+      "correct_target": "RedBin_slot"
+    },
+    {
+      "agent": "RobotB",
+      "object": "ShelfA.blue.slot",
+      "correct_target": "BlueBin_slot"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "step": "base.goto",
+    "target": "ShelfA.top.slot1"
+  },
+  {
+    "step": "arm.pick",
+    "target": "ShelfA.top.slot1"
+  },
+  {
+    "step": "base.goto",
+    "target": "Worktable.right.slot1"
+  },
+  {
+    "step": "arm.place",
+    "target": "RedBin.back.slot0"
+  },
+  {
+    "step": "base.goto",
+    "target": "RedBin.back.slot0"
+  },
+  {
+    "step": "arm.pick",
+    "target": "RedBin.back.slot0"
+  },
+  {
+    "step": "arm.place",
+    "target": "RedBin.back.slot0"
+  }
+]

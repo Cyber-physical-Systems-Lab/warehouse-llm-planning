@@ -1,0 +1,50 @@
+{
+  "id": "move-red-box",
+  "type": "move",
+  "sequence": [
+    {
+      "action": "base.goto",
+      "arguments": {
+        "slot": "mid"
+      },
+      "dock": true,
+      "location": "ShelfA"
+    },
+    {
+      "action": "arm.pick",
+      "arguments": {},
+      "location": "Worktable.right"
+    },
+    {
+      "action": "base.goto",
+      "arguments": {
+        "slot": "mid"
+      },
+      "dock": true,
+      "location": "ShelfA"
+    },
+    {
+      "action": "arm.place",
+      "arguments": {},
+      "location": "RedBin.front_slot0"
+    },
+    {
+      "action": "base.goto",
+      "arguments": {
+        "slot": "mid"
+      },
+      "dock": true,
+      "location": "ShelfA"
+    },
+    {
+      "action": "arm.pick",
+      "arguments": {},
+      "location": "Worktable.right"
+    },
+    {
+      "action": "arm.place",
+      "arguments": {},
+      "location": "RedBin.front_slot0"
+    }
+  ]
+}

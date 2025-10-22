@@ -1,0 +1,50 @@
+{
+  "task_id": "s2_case01",
+  "description": "Collaborative task: RobotA moves red box from ShelfA.red.slot to RedBin.slot; RobotB moves blue box from ShelfA.blue.slot to BlueBin.slot.",
+  "steps": [
+    {
+      "agent": "robotA",
+      "action": "base.goto",
+      "target": "ShelfA.dock"
+    },
+    {
+      "agent": "robotA",
+      "action": "arm.pick",
+      "object": "redbox",
+      "from": "ShelfA.red.slot"
+    },
+    {
+      "agent": "robotA",
+      "action": "base.goto",
+      "target": "RedBin.dock"
+    },
+    {
+      "agent": "robotA",
+      "action": "arm.place",
+      "object": "redbox",
+      "to": "RedBin.slot"
+    },
+    {
+      "agent": "robotB",
+      "action": "base.goto",
+      "target": "ShelfA.dock"
+    },
+    {
+      "agent": "robotB",
+      "action": "arm.pick",
+      "object": "bluebox",
+      "from": "ShelfA.blue.slot"
+    },
+    {
+      "agent": "robotB",
+      "action": "base.goto",
+      "target": "BlueBin.dock"
+    },
+    {
+      "agent": "robotB",
+      "action": "arm.place",
+      "object": "bluebox",
+      "to": "BlueBin.slot"
+    }
+  ]
+}

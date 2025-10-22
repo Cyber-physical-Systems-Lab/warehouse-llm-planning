@@ -1,0 +1,13 @@
+Task: Four robots perform cooperative handover tasks. RobotA & RobotC handle the red box; RobotB & RobotD handle the blue box. The current sequence is A-first, meaning which relay chain initiates first.
+
+RobotA picks up the red box from Shelf.red.slot and places it at Inspection.slot.
+RobotC waits until the red box is available at Inspection.slot, then moves it to RedBin.slot.
+
+RobotB picks up the blue box from Shelf.blue.slot and places it at Inspection.slot.
+RobotD waits until the blue box is available at Inspection.slot, then moves it to BlueBin.slot.
+
+Ensure that only one box occupies the Inspection.slot at any time.
+
+Generate a valid plan in strict JSON format. The plan should include a list of steps like:
+{ "steps": [ {"agent": "robotA", "action": "base.goto", "target": "Shelf.front.dock"} ] }
+Only include valid actions defined in the environment (base.goto, arm.pick, arm.place, wait_until_free).

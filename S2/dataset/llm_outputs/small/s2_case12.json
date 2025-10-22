@@ -1,0 +1,22 @@
+[
+  {
+    "agent": "RobotA",
+    "object": "red box",
+    "target": "ShelfA.blue.slot"
+  },
+  {
+    "agent": "RobotB",
+    "object": "blue box",
+    "target": "ShelfA.blue.slot"
+  },
+  {
+    "agent": "RobotA",
+    "object": "red box",
+    "target": "RedBin.slot"
+  },
+  {
+    "agent": "RobotB",
+    "object": "blue box",
+    "target": "BlueBin_slot"
+  }
+]

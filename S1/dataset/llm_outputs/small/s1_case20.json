@@ -1,0 +1,51 @@
+{
+  "steps": [
+    {
+      "action": "move",
+      "target": "RedBin.front_slot0",
+      "source": "ShelfA.mid_slot2"
+    },
+    {
+      "action": "pick",
+      "dock": true,
+      "position": {
+        "x": 1,
+        "y": 2
+      }
+    },
+    {
+      "action": "place",
+      "target": "RedBin.front_slot0"
+    },
+    {
+      "action": "pick",
+      "dock": false,
+      "position": {
+        "x": 3,
+        "y": 4
+      }
+    },
+    {
+      "action": "move",
+      "target": null,
+      "source": "ShelfA.mid_slot2"
+    },
+    {
+      "action": "place",
+      "target": "RedBin.front_slot0"
+    },
+    {
+      "action": "pick",
+      "dock": true,
+      "position": {
+        "x": 5,
+        "y": 6
+      }
+    },
+    {
+      "action": "move",
+      "target": null,
+      "source": "ShelfA.mid_slot2"
+    }
+  ]
+}

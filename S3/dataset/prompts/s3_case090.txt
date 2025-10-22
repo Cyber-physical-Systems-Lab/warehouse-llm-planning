@@ -1,0 +1,13 @@
+Task: Both robots must transport their boxes via the Inspection area before final placement. The current order is B-first.
+
+RobotA moves the red box from Shelf.red.slot to RedBin.slot via Inspection.slot.
+RobotB moves the blue box from Shelf.blue.slot to BlueBin.slot via Inspection.slot.
+
+Constraints:
+- Only one box can occupy the Inspection.slot at any time.
+- Each robot must perform a full pick–inspect–place sequence.
+- Ensure proper synchronization and mutual exclusion when accessing Inspection.slot.
+
+Generate a valid plan in strict JSON format. The plan should include a list of steps like:
+{ "steps": [ {"agent": "robotA", "action": "base.goto", "target": "Shelf.front.dock"} ] }
+Only include valid actions defined in the environment (base.goto, arm.pick, arm.place, wait_until_free).

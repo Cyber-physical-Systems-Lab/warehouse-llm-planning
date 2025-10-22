@@ -1,0 +1,12 @@
+[
+  {
+    "agent": "RobotA",
+    "object": "Red box (ShelfA.blue.slot)",
+    "correct_target": "RedBin.slot"
+  },
+  {
+    "agent": "RobotB",
+    "object": "Blue box (ShelfA.red.slot)",
+    "correct_target": "BlueBin_slot"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "agent": "RobotA",
+    "object": "Red box",
+    "correct_target": "ShelfA.red.slot",
+    "steps": [
+      {
+        "base.goto": "RedBin.slot",
+        "arm.pick": "Red box",
+        "arm.place": "Blue box"
+      }
+    ]
+  },
+  {
+    "agent": "RobotB",
+    "object": "Blue box",
+    "correct_target": "ShelfA.red.slot",
+    "steps": [
+      {
+        "base.goto": "BlueBin.slot",
+        "arm.pick": "Blue box",
+        "arm.place": "Red box"
+      }
+    ]
+  }
+]

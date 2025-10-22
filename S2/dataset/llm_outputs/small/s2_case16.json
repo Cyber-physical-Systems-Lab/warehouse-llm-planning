@@ -1,0 +1,72 @@
+[
+  {
+    "robot": "RobotA",
+    "step": {
+      "agent": "Base",
+      "object": "Red box",
+      "correct_target": "ShelfA.blue.slot"
+    },
+    "next_step": [
+      {
+        "agent": "Arm",
+        "operation": "pick"
+      },
+      {
+        "agent": "Base",
+        "operation": "goto",
+        "target": "ShelfA.blue.slot"
+      }
+    ],
+    "plan_steps": [
+      {
+        "robot": "RobotA",
+        "step": {
+          "agent": "Arm",
+          "operation": "pick"
+        },
+        "next_step": [
+          {
+            "agent": "Base",
+            "operation": "goto",
+            "target": "ShelfA.blue.slot"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "robot": "RobotB",
+    "step": {
+      "agent": "Base",
+      "object": "Blue box",
+      "correct_target": "ShelfA.blue.slot"
+    },
+    "next_step": [
+      {
+        "agent": "Arm",
+        "operation": "pick"
+      },
+      {
+        "agent": "Base",
+        "operation": "goto",
+        "target": "ShelfA.blue.slot"
+      }
+    ],
+    "plan_steps": [
+      {
+        "robot": "RobotB",
+        "step": {
+          "agent": "Arm",
+          "operation": "pick"
+        },
+        "next_step": [
+          {
+            "agent": "Base",
+            "operation": "goto",
+            "target": "ShelfA.blue.slot"
+          }
+        ]
+      }
+    ]
+  }
+]
