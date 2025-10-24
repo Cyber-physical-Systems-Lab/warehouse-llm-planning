@@ -45,37 +45,38 @@ Each reasoning stage (S1–S4) extends the coordination complexity:
 
 The complete project is organized into modular folders corresponding to the four experimental stages (S1–S4), each implementing the same core symbolic reasoning pipeline with increasing coordination complexity.  
 
-WAREHOUSE-LLM-PLANNING/
- │
- ├── plots/        # Aggregated figures and evaluation visualizations
- ├── figures/      # Framework diagrams and demo visuals (S1–S4)
- ├── S1/           # Stage 1: Single-Robot Baseline
- ├── S2/           # Stage 2: Sequential Two-Robot Cooperation
- ├── S3/           # Stage 3: Shared-Resource Coordination
- ├── S4/           # Stage 4: Multi-Robot Relay Collaboration
- └── README.md     # Project overview and documentation
+#### 🔹 Top-level directories
+| Folder      | Description                               |
+| ----------- | ----------------------------------------- |
+| `S1/`       | Stage 1: Single-Robot Baseline            |
+| `S2/`       | Stage 2: Sequential Two-Robot Cooperation |
+| `S3/`       | Stage 3: Shared-Resource Coordination     |
+| `S4/`       | Stage 4: Multi-Robot Relay Collaboration  |
+| `figures/`  | Framework diagrams                        |
+| `plots/`    | Evaluation result                         |
+| `README.md` | Project overview and documentation        |
 
 ```
 Each stage directory follows a unified internal structure:
 ```
 
-S*/
- │
- ├── dataset/      # Dataset generation and storage (gold, llm_outputs, prompts)
- │
- ├── env/          # Symbolic environment: world creation and action definitions
- │
- ├── llm/          # LLM-based reasoning and plan generation
- │
- ├── validation/   # Logical consistency checks and rule-based verification
- │
- ├── eval/         # Evaluation scripts and aggregated results
- │
- └── figures/      # Stage-specific plots or demo images
+#### 🔹 Inside each stage (`S1–S4`)
+| Subfolder     | Key Files                                              | Description                                                  |
+| ------------- | ------------------------------------------------------ | ------------------------------------------------------------ |
+| `dataset/`    | `generate_dataset.py`                                  | Generates and stores symbolic datasets (`gold/`, `llm_outputs/`, `prompts/`) |
+| `env/`        | `make_world.py`, `actions_spec.py`, `run_demo.py`      | Defines symbolic world, available actions, and demo visualization |
+| `llm/`        | `generate_llm_outputs_batch.py`                        | Generates LLM plans via standardized prompts                 |
+| `validation/` | `validator.py`                                         | Performs logical rule-based validation                       |
+| `eval/`       | `eval_combined_batch.py`, `eval_combined_results.json` | Evaluates plan success and symbolic correctness              |
+| `figures/`    | `plot_overview.py`                                     | Stage-specific result plots                                  |
 
-```
-This structure ensures full traceability between implementation modules and the methodology described in the 
-```
+Each stage shares the same action schema:
+
+```base.goto, arm.pick, arm.place, wait_until_free(S3|S4)```
+
+while introducing higher levels of coordination complexity from S1 to S4.
+
+This structure ensures full traceability between implementation modules and the methodology described in the thesis.
 
 ---
 
