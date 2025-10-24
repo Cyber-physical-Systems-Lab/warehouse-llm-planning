@@ -41,6 +41,42 @@ Each reasoning stage (S1–S4) extends the coordination complexity:
 - **S3:** Shared-resource synchronization between robots  
 - **S4:** Multi-robot relay collaboration with interdependent tasks  
 
+### Repository Structure
+
+The complete project is organized into modular folders corresponding to the four experimental stages (S1–S4), each implementing the same core symbolic reasoning pipeline with increasing coordination complexity.  
+
+WAREHOUSE-LLM-PLANNING/
+ │
+ ├── plots/        # Aggregated figures and evaluation visualizations
+ ├── figures/      # Framework diagrams and demo visuals (S1–S4)
+ ├── S1/           # Stage 1: Single-Robot Baseline
+ ├── S2/           # Stage 2: Sequential Two-Robot Cooperation
+ ├── S3/           # Stage 3: Shared-Resource Coordination
+ ├── S4/           # Stage 4: Multi-Robot Relay Collaboration
+ └── README.md     # Project overview and documentation
+
+```
+Each stage directory follows a unified internal structure:
+```
+
+S*/
+ │
+ ├── dataset/      # Dataset generation and storage (gold, llm_outputs, prompts)
+ │
+ ├── env/          # Symbolic environment: world creation and action definitions
+ │
+ ├── llm/          # LLM-based reasoning and plan generation
+ │
+ ├── validation/   # Logical consistency checks and rule-based verification
+ │
+ ├── eval/         # Evaluation scripts and aggregated results
+ │
+ └── figures/      # Stage-specific plots or demo images
+
+```
+This structure ensures full traceability between implementation modules and the methodology described in the 
+```
+
 ---
 
 ## Installation & Usage
