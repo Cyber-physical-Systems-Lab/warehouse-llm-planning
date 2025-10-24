@@ -33,7 +33,7 @@ The system adopts a **three-layer architecture** forming a reasoning–execution
 2. **Symbolic Environment Layer** – Defines robots, objects, and discrete world slots (PyBullet-based symbolic abstraction).  
 3. **Validation & Evaluation Layer** – Performs rule-based logical checking and computes deterministic performance metrics (TSR, LVR, PS).
 
-👉 Example: figures/framework_overview.png
+![Framework Overview](figures/framework_overview.png)
 
 Each reasoning stage (S1–S4) extends the coordination complexity:
 - **S1:** Single-robot symbolic reasoning and validation  
