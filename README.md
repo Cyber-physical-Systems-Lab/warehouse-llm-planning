@@ -135,7 +135,7 @@ Each stage (S1–S4) demonstrates progressively more complex reasoning and coord
 - Demonstrates basic LLM-to-symbolic translation
 
 ```
-[![S1 Video](https://youtu.be/4JclamxvlxY?si=HPyb4AvdDQvErHs6)
+[![Watch the video](https://img.youtube.com/vi/4JclamxvlxY/0.jpg)](https://youtu.be/4JclamxvlxY)
 ```
 
 ### **Stage 2 — Sequential Two-Robot Cooperation**
