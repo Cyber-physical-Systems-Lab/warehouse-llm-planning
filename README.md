@@ -127,50 +127,63 @@ ollama run qwen3
 
 ## Simulations / Demos
 
-Each stage (S1–S4) demonstrates progressively more complex reasoning and coordination.
+Each stage (S1–S4) visually demonstrates the reasoning and coordination process of the proposed symbolic framework.  
+These visualizations are **illustrative demonstrations** rather than physical or dynamic simulations.  
+Their purpose is to **show how the symbolic reasoning pipeline scales** from a single robot to multi-agent collaboration under increasing coordination complexity.
+
+All reasoning, validation, and evaluation are performed purely at the **symbolic level** — no physics-based or trajectory-level simulation is involved.  
+The images below are representative snapshots generated from symbolic execution logs and plan visualizations.
+
+---
 
 ### **Stage 1 — Single-Robot Baseline**
+- Symbolic pick-and-place reasoning with deterministic plan validation.  
+- Demonstrates basic translation from natural-language prompt to symbolic plan.
 
-- Symbolic pick-and-place with deterministic plan validation
-- Demonstrates basic LLM-to-symbolic translation
+<p align="center">
+  <img src="figures/s1_world_demo.png" width="85%">
+  <br>
+  <em>Figure S1. Example symbolic reasoning result for a single-robot task.</em>
+</p>
 
-```
-[![S1 Video](https://markdown-videos-api.jorgenkh.no/youtube/4JclamxvlxY)](https://youtu.be/4JclamxvlxY)
-```
+
+---
 
 ### **Stage 2 — Sequential Two-Robot Cooperation**
+- Models ordered task execution between two robots.  
+- Emphasizes sequential dependency handling in symbolic plans.
 
-- Task division and sequential symbolic dependencies
+<p align="center">
+  <img src="figures/s2_world_demo.png" width="85%">
+  <br>
+  <em>Figure S2. Example symbolic coordination between two robots.</em>
+</p>
 
-```
-[Insert image or GIF placeholder: e.g., figures/S2_demo.gif]
-```
+
+---
 
 ### **Stage 3 — Shared-Resource Coordination**
+- Introduces synchronization through `wait_until_free` to enforce resource exclusivity.  
+- Validates logical consistency in concurrent symbolic actions.
 
-- Models mutual exclusion with `wait_until_free` actions
+<p align="center">
+  <img src="figures/s3_world_demo.png" width="85%">
+  <br>
+  <em>Figure S3. Shared-resource reasoning with symbolic synchronization constraints.</em>
+</p>
 
-```
-[Insert image or video placeholder: e.g., figures/S3_demo.mp4]
-```
+
+---
 
 ### **Stage 4 — Multi-Robot Relay Collaboration**
+- Demonstrates multi-agent reasoning with interdependent tasks.  
+- Tests symbolic scalability and LLM reasoning under chained dependencies.
 
-- Complex chained reasoning and interdependent task execution
-
-```
-[Insert image or video placeholder: e.g., figures/S4_demo.mp4]
-```
-
-> *Tip:* Videos or GIFs should be uploaded externally (e.g., Imgur, Giphy, or YouTube)
->  and linked here using Markdown syntax:
->
-> ```
-> ![S3 Demo](https://i.imgur.com/your_demo_link.gif)
-> [![S4 Video](https://markdown-videos-api.jorgenkh.no/youtube/YourVideoID)](https://youtu.be/YourVideoID)
-> ```
-
-------
+<p align="center">
+  <img src="figures/s4_world_demo.png" width="85%">
+  <br>
+  <em>Figure S4. Symbolic relay collaboration illustrating reasoning scalability.</em>
+</p>
 
 ## Configuration
 
