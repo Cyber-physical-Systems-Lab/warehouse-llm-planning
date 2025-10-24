@@ -230,13 +230,11 @@ Performance metrics:
 
 Example visualization:
 
-```
 <p align="center">
   <img src="plots/overview_all_stages.png" width="85%">
   <br>
-  <em>Figure: Overview of evaluation results across all stages (S1–S4).</em>
+  <em>Figure: overview_all_stages_evaluation</em>
 </p>
-```
 
 ------
 
