@@ -18,7 +18,7 @@ Main Author(s) of the Project: Yixin Huang
 This project develops a modular symbolic reasoning framework for **multi-robot task planning using Large Language Models (LLMs)**.  
 The system integrates high-level natural-language reasoning with symbolic validation, enabling interpretable and verifiable plan generation.
 
-The framework models a **static warehouse environment** in which multiple robots collaborate through symbolic actions (`base.goto`, `arm.pick`, `arm.place`).  
+The framework models a **static warehouse environment** in which multiple robots collaborate through symbolic actions (`base.goto`, `arm.pick`, `arm.place`,`wait_until_free(S3|S4)`).  
 Reasoning and evaluation occur purely at the **symbolic level**, ensuring reproducibility and logical transparency.
 
 > Example application:  
@@ -63,9 +63,9 @@ Each stage directory follows a unified internal structure:
 #### 🔹 Inside each stage (`S1–S4`)
 | Subfolder     | Key Files                                              | Description                                                  |
 | ------------- | ------------------------------------------------------ | ------------------------------------------------------------ |
-| `dataset/`    | `generate_dataset.py`                                  | Generates and stores symbolic datasets (`gold/`, `llm_outputs/`, `prompts/`) |
+| `dataset/`    | `generate_dataset.py`                                  | Generates and stores symbolic datasets (`gold/`,`prompts/`)  |
 | `env/`        | `make_world.py`, `actions_spec.py`, `run_demo.py`      | Defines symbolic world, available actions, and demo visualization |
-| `llm/`        | `generate_llm_outputs_batch.py`                        | Generates LLM plans via standardized prompts                 |
+| `llm/`        | `generate_llm_outputs_batch.py`                        | Generates LLM plans via standardized prompts(In `/dataset/llm_outputs`) |
 | `validation/` | `validator.py`                                         | Performs logical rule-based validation                       |
 | `eval/`       | `eval_combined_batch.py`, `eval_combined_results.json` | Evaluates plan success and symbolic correctness              |
 | `figures/`    | `plot_overview.py`                                     | Stage-specific result plots                                  |
