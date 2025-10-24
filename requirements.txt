@@ -1,0 +1,29 @@
+# Core Python environment
+python==3.10.*
+
+# Simulation and symbolic environment
+pybullet>=3.2.5
+numpy>=1.26.0
+pandas>=2.2.0
+
+# Visualization and plotting
+matplotlib>=3.8.0
+seaborn>=0.13.0
+
+# LLM inference and utilities
+requests>=2.31.0
+tqdm>=4.66.0
+pyyaml>=6.0.1
+
+# Evaluation and metrics
+scikit-learn>=1.4.0
+
+# Optional: For local LLM inference using Ollama
+ollama>=0.1.7
+
+# Optional: JSON and logging utilities
+jsonlines>=4.0.0
+loguru>=0.7.0
+
+# For reproducibility and environment control
+python-dotenv>=1.0.1
