@@ -231,7 +231,11 @@ Performance metrics:
 Example visualization:
 
 ```
-[Insert image placeholder: plots/evaluation_overview.png]
+<p align="center">
+  <img src="plots/overview_all_stages.png" width="85%">
+  <br>
+  <em>overview_all_stages_evaluation</em>
+</p>
 ```
 
 ------
