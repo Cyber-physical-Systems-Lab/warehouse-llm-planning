@@ -1,0 +1,209 @@
+# Collaborative Multi-Robot Task Planning Using Large Language Models
+Main Author(s) of the Project: Yixin Huang
+
+## Table of Contents
+- [Overview](#overview)
+- [System Architecture](#system-architecture)
+- [Installation & Usage](#installation--usage)
+- [Simulations / Demos](#simulations--demos)
+- [Configuration](#configuration)
+- [Dependencies](#dependencies)
+- [Data Logging & Evaluation](#data-logging--evaluation)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Overview
+This project develops a modular symbolic reasoning framework for **multi-robot task planning using Large Language Models (LLMs)**.  
+The system integrates high-level natural-language reasoning with symbolic validation, enabling interpretable and verifiable plan generation.
+
+The framework models a **static warehouse environment** in which multiple robots collaborate through symbolic actions (`base.goto`, `arm.pick`, `arm.place`).  
+Reasoning and evaluation occur purely at the **symbolic level**, ensuring reproducibility and logical transparency.
+
+> Example application:  
+> Symbolic task planning and coordination of warehouse robots using local LLM inference through the *Ollama* framework.
+
+---
+
+## System Architecture
+The system adopts a **three-layer architecture** forming a reasoning–execution–verification loop:
+
+1. **LLM Reasoning Layer** – Generates symbolic plans from standardized prompts.  
+2. **Symbolic Environment Layer** – Defines robots, objects, and discrete world slots (PyBullet-based symbolic abstraction).  
+3. **Validation & Evaluation Layer** – Performs rule-based logical checking and computes deterministic performance metrics (TSR, LVR, PS).
+
+👉 Example: figures/framework_overview.png
+
+Each reasoning stage (S1–S4) extends the coordination complexity:
+- **S1:** Single-robot symbolic reasoning and validation  
+- **S2:** Sequential two-robot cooperation  
+- **S3:** Shared-resource synchronization between robots  
+- **S4:** Multi-robot relay collaboration with interdependent tasks  
+
+---
+
+## Installation & Usage
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/Cyber-physical-Systems-Lab/warehouse-llm-planning.git
+cd warehouse-llm-planning
+```
+
+### 2. Create the environment
+
+```
+conda create -n whsim python=3.10
+conda activate whsim
+pip install -r requirements.txt
+```
+
+### 3. Run symbolic dataset generation
+
+```
+cd S1/dataset
+python generate_dataset.py
+```
+
+### 4. Generate LLM outputs (example for S1)
+
+```
+cd ../llm
+python generate_llm_outputs_batch.py
+```
+
+### 5. Validate and evaluate
+
+```
+cd ../eval
+python eval_combined_batch.py
+```
+
+For local LLM inference, the project supports **Ollama** models:
+
+```
+ollama run llama3
+ollama run gemma3
+ollama run qwen3
+```
+
+## Simulations / Demos
+
+Each stage (S1–S4) demonstrates progressively more complex reasoning and coordination.
+
+### **Stage 1 — Single-Robot Baseline**
+
+- Symbolic pick-and-place with deterministic plan validation
+- Demonstrates basic LLM-to-symbolic translation
+
+```
+[Insert image or GIF placeholder: e.g., figures/S1_demo.gif]
+```
+
+### **Stage 2 — Sequential Two-Robot Cooperation**
+
+- Task division and sequential symbolic dependencies
+
+```
+[Insert image or GIF placeholder: e.g., figures/S2_demo.gif]
+```
+
+### **Stage 3 — Shared-Resource Coordination**
+
+- Models mutual exclusion with `wait_until_free` actions
+
+```
+[Insert image or video placeholder: e.g., figures/S3_demo.mp4]
+```
+
+### **Stage 4 — Multi-Robot Relay Collaboration**
+
+- Complex chained reasoning and interdependent task execution
+
+```
+[Insert image or video placeholder: e.g., figures/S4_demo.mp4]
+```
+
+> *Tip:* Videos or GIFs should be uploaded externally (e.g., Imgur, Giphy, or YouTube)
+>  and linked here using Markdown syntax:
+>
+> ```
+> ![S3 Demo](https://i.imgur.com/your_demo_link.gif)
+> [![S4 Video](https://markdown-videos-api.jorgenkh.no/youtube/YourVideoID)](https://youtu.be/YourVideoID)
+> ```
+
+------
+
+## Configuration
+
+All configuration files and parameters are defined within each stage directory (`S1–S4`).
+
+Example configurable parameters include:
+
+```
+agents: 2
+slots: ["Shelf.red.slot", "Inspection.slot", "RedBin.slot"]
+actions: ["base.goto", "arm.pick", "arm.place", "wait_until_free"]
+metrics: ["TSR", "LVR", "PS"]
+```
+
+Each stage can be customized by modifying its corresponding dataset and validation scripts.
+
+------
+
+## Dependencies
+
+- **Python** 3.10
+- **PyBullet** 3.2+
+- **NumPy**, **Pandas**, **Matplotlib**
+- **Ollama** (for local LLM inference)
+- **Llama 3**, **Gemma 3**, **Qwen 3** models
+- **Operating system:** Windows / Linux / macOS
+
+> The project is fully runnable on a local GPU (e.g., NVIDIA RTX 3080)
+>  and does not require any cloud-based inference.
+
+------
+
+## Data Logging & Evaluation
+
+- Symbolic datasets stored under: `S*/dataset/{gold, llm_outputs, prompts}`
+- Validation results saved in: `S*/eval/eval_combined_results.json`
+- Visualization scripts in: `plots/` and `figures/`
+
+Performance metrics:
+
+- **TSR (Task Success Rate)** – Percentage of valid goal-reaching plans
+- **LVR (Logical Validity Rate)** – Ratio of logically consistent plans
+- **PS (Plan Similarity)** – Cosine similarity between gold-standard and generated plans
+
+Example visualization:
+
+```
+[Insert image placeholder: plots/evaluation_overview.png]
+```
+
+------
+
+## Contributing
+
+This repository is part of **CPS-Lab**’s open research framework on symbolic reasoning and LLM-based planning.
+ If you wish to extend or reproduce experiments:
+
+1. Fork the repository
+2. Create a feature branch (`feature/new-stage`)
+3. Commit and push your changes
+4. Submit a pull request for review
+
+List of contributors:
+
+- Yixin Huang (main author)
+- CPS-Lab Team, Uppsala University
+
+------
+
+## License
+
+This project is released under the **MIT License**.
+ © 2025 Cyber-Physical Systems Laboratory, Uppsala University.
