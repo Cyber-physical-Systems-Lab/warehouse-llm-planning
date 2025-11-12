@@ -1,0 +1,42 @@
+{
+  "task_id": "s1_case021",
+  "description": "Robot moves the red box from Shelf.red.slot to RedBin.slot via Worktable.slot.",
+  "steps": [
+    {
+      "action": "base.goto",
+      "target": "Shelf.front.dock"
+    },
+    {
+      "action": "arm.pick",
+      "object": "redbox",
+      "from": "Shelf.red.slot"
+    },
+    {
+      "action": "base.goto",
+      "target": "Worktable.dock"
+    },
+    {
+      "action": "arm.place",
+      "object": "redbox",
+      "to": "Worktable.slot"
+    },
+    {
+      "action": "base.goto",
+      "target": "Worktable.dock"
+    },
+    {
+      "action": "arm.pick",
+      "object": "redbox",
+      "from": "Worktable.slot"
+    },
+    {
+      "action": "base.goto",
+      "target": "RedBin.dock"
+    },
+    {
+      "action": "arm.place",
+      "object": "redbox",
+      "to": "RedBin.slot"
+    }
+  ]
+}
