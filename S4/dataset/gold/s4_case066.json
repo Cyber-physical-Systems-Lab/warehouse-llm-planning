@@ -1,0 +1,103 @@
+{
+  "task_id": "s4_case066",
+  "description": "Four robots perform cooperative handover tasks. RobotA & RobotC handle the red box; RobotB & RobotD handle the blue box. The current sequence is B-first, meaning which relay chain initiates first.",
+  "goal": {
+    "RedBin.slot": "redbox",
+    "BlueBin.slot": "bluebox"
+  },
+  "steps": [
+    {
+      "agent": "robotB",
+      "action": "base.goto",
+      "target": "Shelf.front.dock"
+    },
+    {
+      "agent": "robotB",
+      "action": "arm.pick",
+      "object": "bluebox",
+      "from": "Shelf.blue.slot"
+    },
+    {
+      "agent": "robotA",
+      "action": "base.goto",
+      "target": "Shelf.front.dock"
+    },
+    {
+      "agent": "robotA",
+      "action": "arm.pick",
+      "object": "redbox",
+      "from": "Shelf.red.slot"
+    },
+    {
+      "agent": "robotB",
+      "action": "base.goto",
+      "target": "Inspection.dock"
+    },
+    {
+      "agent": "robotB",
+      "action": "arm.place",
+      "object": "bluebox",
+      "to": "Inspection.slot"
+    },
+    {
+      "agent": "robotD",
+      "action": "base.goto",
+      "target": "Inspection.dock"
+    },
+    {
+      "agent": "robotD",
+      "action": "arm.pick",
+      "object": "bluebox",
+      "from": "Inspection.slot"
+    },
+    {
+      "agent": "robotD",
+      "action": "base.goto",
+      "target": "BlueBin.dock"
+    },
+    {
+      "agent": "robotD",
+      "action": "arm.place",
+      "object": "bluebox",
+      "to": "BlueBin.slot"
+    },
+    {
+      "agent": "robotA",
+      "action": "base.goto",
+      "target": "Inspection.dock"
+    },
+    {
+      "agent": "robotA",
+      "action": "wait_until_free",
+      "target": "Inspection.slot"
+    },
+    {
+      "agent": "robotA",
+      "action": "arm.place",
+      "object": "redbox",
+      "to": "Inspection.slot"
+    },
+    {
+      "agent": "robotC",
+      "action": "base.goto",
+      "target": "Inspection.dock"
+    },
+    {
+      "agent": "robotC",
+      "action": "arm.pick",
+      "object": "redbox",
+      "from": "Inspection.slot"
+    },
+    {
+      "agent": "robotC",
+      "action": "base.goto",
+      "target": "RedBin.dock"
+    },
+    {
+      "agent": "robotC",
+      "action": "arm.place",
+      "object": "redbox",
+      "to": "RedBin.slot"
+    }
+  ]
+}

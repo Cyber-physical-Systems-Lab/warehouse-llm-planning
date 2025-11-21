@@ -1,0 +1,46 @@
+Task: Four robots perform cooperative handover tasks. RobotA & RobotC handle the red box; RobotB & RobotD handle the blue box. The current sequence is A-first, meaning which relay chain initiates first.
+
+This scenario involves four robots performing two cooperative relay chains:
+- The redbox is relayed by robotA → robotC.
+- The bluebox is relayed by robotB → robotD.
+Each relay chain must route its box through the shared Inspection.slot.
+
+Relay objective:
+- robotA picks and transports the redbox from Shelf.red.slot to Inspection.slot.
+- robotC waits until the redbox becomes available at Inspection.slot, then moves it to RedBin.slot.
+- robotB picks and transports the bluebox from Shelf.blue.slot to Inspection.slot.
+- robotD waits until the bluebox becomes available at Inspection.slot, then moves it to BlueBin.slot.
+
+Shared resource constraint:
+- Inspection.slot may hold at most ONE box at any time.
+- Any robot placing INTO Inspection.slot must issue a `wait_until_free` step immediately before placing.
+
+Environment symbols:
+- Objects: redbox, bluebox
+- Slots: Shelf.red.slot, Shelf.blue.slot, Inspection.slot, RedBin.slot, BlueBin.slot
+- Poses/docks: Shelf.front.dock, Inspection.dock, RedBin.dock, BlueBin.dock
+
+Coordination rules:
+1) robotA & robotC form the red relay chain; robotB & robotD form the blue relay chain.
+2) A relay chain requires two stages: (i) deposit the box at Inspection.slot, (ii) pick it up and finish delivery.
+3) The two relay chains may overlap in time, but mutual exclusion at Inspection.slot must always be respected.
+4) The plan must reflect multi-robot concurrency: do NOT serialize all actions of one full chain before the other begins.
+5) Every step MUST include an "agent" field identifying one of: robotA, robotB, robotC, robotD.
+
+Allowed high-level actions (you MUST only use these):
+- base.goto
+- arm.pick
+- arm.place
+- wait_until_free
+
+Valid JSON action formats:
+- {"agent": "<agent>", "action": "base.goto", "target": "<pose>"}
+- {"agent": "<agent>", "action": "arm.pick", "object": "<obj>", "from": "<slot>"}
+- {"agent": "<agent>", "action": "arm.place", "object": "<obj>", "to": "<slot>"}
+- {"agent": "<agent>", "action": "wait_until_free", "target": "Inspection.slot"}
+
+Output format (STRICT JSON):
+- Output ONLY one JSON object of the form:
+  {"steps": [ STEP_1, STEP_2, ... ]}
+- DO NOT include explanations or comments.
+- Use only the given agents, actions, objects, slots, and poses.

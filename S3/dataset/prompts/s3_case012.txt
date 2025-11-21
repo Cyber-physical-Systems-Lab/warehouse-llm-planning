@@ -1,0 +1,61 @@
+Task: Two robots (robotA, robotB) must each move their own box through a shared inspection area.
+
+High-level objective:
+- robotA moves redbox from Shelf.red.slot to RedBin.slot.
+- robotB moves bluebox from Shelf.blue.slot to BlueBin.slot.
+- Both boxes must pass through the shared Inspection.slot on the way to their bins.
+
+Shared resource:
+- Inspection.slot is a single shared slot.
+- Only one box can occupy Inspection.slot at any time (mutual exclusion).
+
+Environment symbols:
+- Objects: redbox, bluebox
+- Slots: Shelf.red.slot, Shelf.blue.slot, Inspection.slot, RedBin.slot, BlueBin.slot
+- Poses/docks: Shelf.front.dock, Inspection.dock, RedBin.dock, BlueBin.dock
+
+Coordination rules (MUST follow):
+1) Each robot must first pick up its own box from the shelf
+   (robotA from Shelf.red.slot, robotB from Shelf.blue.slot)
+   before any robot moves a box from Inspection.slot to its bin.
+2) Before any robot places INTO Inspection.slot, it MUST issue
+   a wait step that checks the slot is free, immediately before
+   that place step.
+3) The plan should show overlapping activity: do NOT make one robot
+   finish its entire flow before the other even starts. Their
+   actions should be interleaved in time.
+4) Use exactly these names for slots and bins:
+   Shelf.red.slot, Shelf.blue.slot, Inspection.slot, RedBin.slot, BlueBin.slot.
+5) Every step MUST include the "agent" field.
+
+In this scenario, robotA is expected to be the first robot that
+successfully uses the shared Inspection.slot, while robotB uses
+it later, after coordination.
+
+Available high-level actions (JSON steps only):
+- base.goto
+- arm.pick
+- arm.place
+- wait_until_free
+
+Action formats (you MUST only use these JSON shapes):
+- {"agent": "<agent_name>",
+   "action": "base.goto",
+   "target": "<PoseName>"}
+- {"agent": "<agent_name>",
+   "action": "arm.pick",
+   "object": "<Obj>",
+   "from": "<SlotName>"}
+- {"agent": "<agent_name>",
+   "action": "arm.place",
+   "object": "<Obj>",
+   "to": "<SlotName>"}
+- {"agent": "<agent_name>",
+   "action": "wait_until_free",
+   "target": "Inspection.slot"}
+
+Output format (STRICT JSON):
+- Return ONLY a single JSON object with a single key "steps":
+  {"steps": [ STEP_1, STEP_2, ... ]}
+- Do NOT include any extra text, comments, or code fences.
+- Use only the given agents, actions, objects, slots, and poses.

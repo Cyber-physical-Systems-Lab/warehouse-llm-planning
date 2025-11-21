@@ -1,0 +1,30 @@
+Task: Sequential cooperative task: RobotA first moves the red box from Shelf.red.slot to RedBin.slot, then RobotB moves the blue box from Shelf.blue.slot to BlueBin.slot.
+
+Two robots (robotA and robotB) operate in a small warehouse.
+The objective is:
+- robotA moves the redbox from Shelf.red.slot to RedBin.slot.
+- After robotA has finished its part, robotB moves the bluebox from Shelf.blue.slot to BlueBin.slot.
+
+Both robots act independently, but robotB must only start after robotA is done.
+
+Environment symbols:
+- Objects: redbox, bluebox
+- Slots: Shelf.red.slot, Shelf.blue.slot, RedBin.slot, BlueBin.slot
+- Poses/docks: Shelf.front.dock, RedBin.dock, BlueBin.dock
+
+Available high-level actions (you MUST only use these):
+- base.goto(target)
+- arm.pick(object, from)
+- arm.place(object, to)
+
+Action step formats (examples with placeholders):
+- {"agent": "<agent_name>", "action": "base.goto", "target": "<pose_name>"}
+- {"agent": "<agent_name>", "action": "arm.pick", "object": "<object_name>", "from": "<slot_name>"}
+- {"agent": "<agent_name>", "action": "arm.place", "object": "<object_name>", "to": "<slot_name>"}
+where <agent_name> is either "robotA" or "robotB".
+
+Output format (STRICT JSON):
+- You MUST output ONLY a single JSON object with the structure:
+  {"steps": [ STEP_1, STEP_2, ... ]}
+- Do NOT include any explanations, comments, or extra text.
+- Use only the given agents, actions, objects, slots, and poses.
