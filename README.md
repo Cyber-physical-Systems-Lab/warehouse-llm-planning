@@ -9,7 +9,7 @@ I would like to extend my deepest gratitude to my supervisor and reviewer for th
 
 - [Overview](#overview)
 - [System Architecture](#system-architecture)
-- [Repository Structure](#Repository Structure)
+- [Repository Structure](#Repository-Structure)
 - [Installation & Usage](#installation--usage)
 - [Simulations / Demos](#simulations--demos)
 - [Configuration](#configuration)
