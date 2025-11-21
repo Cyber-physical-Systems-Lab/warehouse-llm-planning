@@ -204,8 +204,3 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
-
-touch env/s1/.gitkeep
-touch env/s2/.gitkeep
-touch env/s3/.gitkeep
-touch env/s4/.gitkeep
