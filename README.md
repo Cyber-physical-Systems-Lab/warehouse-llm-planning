@@ -1,9 +1,15 @@
 # Collaborative Multi-Robot Task Planning Using Large Language Models
-Main Author(s) of the Project: Yixin Huang
+Main Author of the Project: Yixin Huang
+
+Supervisor: Ronald Cumbal | Reviewer: Didem Gürdür Broo
+
+I would like to extend my deepest gratitude to my supervisor and reviewer for their invaluable guidance throughout my thesis project. The journey to completing this paper has been filled with ups and downs, and the full extent of the challenges I faced is something only I can truly know. However, I am incredibly fortunate and grateful to have had the support of the very best supervisor and reviewer.
 
 ## Table of Contents
+
 - [Overview](#overview)
 - [System Architecture](#system-architecture)
+- [Repository Structure](#Repository Structure)
 - [Installation & Usage](#installation--usage)
 - [Simulations / Demos](#simulations--demos)
 - [Configuration](#configuration)
@@ -15,46 +21,155 @@ Main Author(s) of the Project: Yixin Huang
 ---
 
 ## Overview
-This project develops a modular symbolic reasoning framework for **multi-robot task planning using Large Language Models (LLMs)**.  
-The system integrates high-level natural-language reasoning with symbolic validation, enabling interpretable and verifiable plan generation.
 
-The framework models a **static warehouse environment** in which multiple robots collaborate through symbolic actions (`base.goto`, `arm.pick`, `arm.place`,`wait_until_free(S3|S4)`).  
-Reasoning and evaluation occur purely at the **symbolic level**, ensuring reproducibility and logical transparency.
+This repository provides a **fully reproducible symbolic planning benchmark** for evaluating the ability of Large Language Models (LLMs) to generate **logically valid multi-robot task plans**.
 
-> Example application:  
-> Symbolic task planning and coordination of warehouse robots using local LLM inference through the *Ollama* framework.
+The system integrates:
 
----
+- **LLM-based plan generation** (Llama3, Gemma3, Qwen3 via *Ollama*)
+- A deterministic **symbolic warehouse environment** (robots, objects, slots)
+- A rule-based **symbolic validator** that checks preconditions, effects, and invariants
+- Stage-wise evaluation across **four benchmark scenarios (S1–S4)**
+
+All reasoning and evaluation occur **purely at the symbolic level**.
+ PyBullet is used only for optional visualization—physical simulation, dynamics, and collisions are **not** used.
+
+### What this repository provides
+
+- A unified symbolic action schema (`base.goto`, `arm.pick`, `arm.place`, `wait_until_free(S3|S4)`)
+- Automatic prompt generation and LLM inference pipeline
+- Deterministic validation of logical correctness and goal satisfaction
+- Quantitative evaluation using TSR, LVR, and PS
+- Four progressively harder multi-robot scenarios for benchmarking reasoning scalability
+
+**Example use case:**
+Evaluate how well different LLMs can generate logically correct symbolic plans for multi-robot warehouse tasks involving shared resources, mutual exclusion, and relay-style coordination.
 
 ## System Architecture
-The system adopts a **three-layer architecture** forming a reasoning–execution–verification loop:
 
-1. **LLM Reasoning Layer** – Generates symbolic plans from standardized prompts.  
-2. **Symbolic Environment Layer** – Defines robots, objects, and discrete world slots (PyBullet-based symbolic abstraction).  
-3. **Validation & Evaluation Layer** – Performs rule-based logical checking and computes deterministic performance metrics (TSR, LVR, PS).
+The project follows a **modular three-layer architecture** that mirrors the methodology used in the thesis.
+ This structure cleanly separates:
 
-![Framework Overview](figures/framework_overview.png)
+1. **LLM reasoning**
+2. **Symbolic environment modeling**
+3. **Deterministic plan validation & evaluation**
 
-Each reasoning stage (S1–S4) extends the coordination complexity:
-- **S1:** Single-robot symbolic reasoning and validation  
-- **S2:** Sequential two-robot cooperation  
-- **S3:** Shared-resource synchronization between robots  
-- **S4:** Multi-robot relay collaboration with interdependent tasks  
+This ensures that every stage (S1–S4) uses the exact same pipeline and symbolic rules.
 
-### Repository Structure
+<p align="center">
+  <img src="figures/framework_overview.png" width="60%">
+</p>
+
+### 1. LLM Reasoning Layer
+
+This layer converts structured natural-language prompts into **symbolic action plans**.
+
+- Uses local LLM inference through **Ollama**
+- Supports multiple open-source models (`llama3.2:1b`, `gemma3:4b`, `qwen3:8b`)
+- Produces plans using the unified JSON schema:
+
+```
+{"agent": "robotA", "action": "arm.pick", "arg": "Shelf.red.slot"}
+```
+
+**Key Responsibilities**
+
+- Encode task objectives and environment state into prompts
+- Generate symbolic plans in a single forward pass
+- Guarantee structural consistency through a strict JSON format
+
+### 2. Symbolic Environment Layer
+
+This layer defines a **discrete warehouse-style world** used for all stages (S1–S4).
+
+It includes:
+
+- symbolic slots (Shelf, Worktable, Inspection, Bin)
+- robot poses & reachability
+- object locations
+- shared-resource constraints (e.g., single-occupancy inspection slot)
+- precondition–effect rules for actions
+
+Actions follow a fixed vocabulary:
+
+```
+base.goto
+arm.pick
+arm.place
+wait_until_free  (used in S3–S4)
+```
+
+**Important:**
+No physics, collisions, or motion planning are used.
+PyBullet is only used to *optionally visualize* scenes—it does **not** affect validation.
+
+### 3. Symbolic Validation Layer
+
+All generated plans are executed by a **deterministic symbolic state machine**.
+
+The validator checks:
+
+#### Schema correctness
+
+Correct fields, valid symbols, well-formed action entries.
+
+#### Preconditions
+
+Robot reachability, object existence, slot availability, shared-resources rules.
+
+#### Effects
+
+Update world state deterministically.
+
+#### Invariants
+
+- Each object appears exactly once
+- Each robot holds ≤ 1 object
+- Shared resources obey mutual exclusion
+
+#### Goal satisfaction
+
+Objects end in the correct slots; robots finish empty-handed.
+
+This produces two binary outputs for every plan:
+
+- **logic_ok** (symbolic consistency)
+- **goal_ok** (task success)
+
+### End-to-End Pipeline
+
+All stages (S1–S4) follow the same unified process:
+
+```
+generate_dataset.py      →  creates prompts & gold plans
+generate_llm_outputs.py  →  runs LLM inference
+validator.py             →  checks plan correctness
+eval_combined_batch.py   →  aggregates TSR/LVR/PS
+plot_overview.py         →  visualization
+```
+
+The pipeline is fully deterministic and entirely symbolic.
+
+### Architecture Diagram
+
+<p align="center">
+  <img src="figures/system_pipeline.png" width="60%">
+</p>
+
+## Repository Structure
 
 The complete project is organized into modular folders corresponding to the four experimental stages (S1–S4), each implementing the same core symbolic reasoning pipeline with increasing coordination complexity.  
 
 #### 🔹 Top-level directories
-| Folder      | Description                               |
-| ----------- | ----------------------------------------- |
-| `S1/`       | Stage 1: Single-Robot Baseline            |
-| `S2/`       | Stage 2: Sequential Two-Robot Cooperation |
-| `S3/`       | Stage 3: Shared-Resource Coordination     |
-| `S4/`       | Stage 4: Multi-Robot Relay Collaboration  |
-| `figures/`  | Framework diagrams                        |
-| `plots/`    | Evaluation result                         |
-| `README.md` | Project overview and documentation        |
+| Folder      | Description                                              |
+| ----------- | -------------------------------------------------------- |
+| `S1/`       | Stage 1: Single-Robot Baseline                           |
+| `S2/`       | Stage 2: Sequential Two-Robot Cooperation                |
+| `S3/`       | Stage 3: Shared-Resource Coordination                    |
+| `S4/`       | Stage 4: Multi-Robot Relay Collaboration (Chained Relay) |
+| `figures/`  | Project diagrams                                         |
+| `plots/`    | Evaluation result                                        |
+| `README.md` | Project overview and documentation                       |
 
 ```
 Each stage directory follows a unified internal structure:
@@ -64,7 +179,7 @@ Each stage directory follows a unified internal structure:
 | Subfolder     | Key Files                                              | Description                                                  |
 | ------------- | ------------------------------------------------------ | ------------------------------------------------------------ |
 | `dataset/`    | `generate_dataset.py`                                  | Generates and stores symbolic datasets (`gold/`,`prompts/`)  |
-| `env/`        | `make_world.py`, `actions_spec.py`, `run_demo.py`      | Defines symbolic world, available actions, and demo visualization |
+| `env/`        | `make_world.py`, `actions_spec.py`, `run_demo.py`      | Defines the symbolic world, available actions, and an optional PyBullet-based scene visualization used only to illustrate the task logic (not for simulation or evaluation). |
 | `llm/`        | `generate_llm_outputs_batch.py`                        | Generates LLM plans via standardized prompts(In `/dataset/llm_outputs`) |
 | `validation/` | `validator.py`                                         | Performs logical rule-based validation                       |
 | `eval/`       | `eval_combined_batch.py`, `eval_combined_results.json` | Evaluates plan success and symbolic correctness              |
@@ -78,61 +193,97 @@ while introducing higher levels of coordination complexity from S1 to S4.
 
 This structure ensures full traceability between implementation modules and the methodology described in the thesis.
 
----
-
 ## Installation & Usage
 
-### 1. Clone the repository
-```bash
+### **1. Install Ollama**
+
+Download and install:
+ 👉 https://ollama.ai
+
+### **2. Pull required models**
+
+```
+ollama pull llama3.2:1b
+ollama pull gemma3:4b
+ollama pull qwen3:8b
+```
+
+### 3. Clone the repository
+
+```
 git clone https://github.com/Cyber-physical-Systems-Lab/warehouse-llm-planning.git
 cd warehouse-llm-planning
 ```
 
-### 2. Create the environment
+### **4. Create Conda environment**
 
 ```
-conda create -n whsim python=3.10
-conda activate whsim
+conda create -n llm-planning python=3.10
+conda activate llm-planning
 pip install -r requirements.txt
 ```
 
-### 3. Run symbolic dataset generation
+------
+
+### **4. Generate datasets**
 
 ```
-cd S1/dataset
-python generate_dataset.py
+python S1/dataset/generate_dataset.py
+...
+(Here we use S1 as an example; S2–S4 follow the same command format.)
 ```
 
-### 4. Generate LLM outputs (example for S1)
+### **5. Run LLM inference**
+
+Here, *small*, *middle*, and *large* correspond respectively to **llama3.2:1b**, **gemma3:4b**, and **qwen3:8b**.
 
 ```
-cd ../llm
-python generate_llm_outputs_batch.py
+cd S1/llm
+python generate_llm_outputs_batch.py --model small
+python generate_llm_outputs_batch.py --model middle
+python generate_llm_outputs_batch.py --model large
+...
+(Here we use S1 as an example; S2–S4 follow the same command format.)
 ```
 
-### 5. Validate and evaluate
+### **6. Validate & evaluate**
 
 ```
-cd ../eval
-python eval_combined_batch.py
+python S1/eval/eval_combined_batch.py
+...
+(Here we use S1 as an example; S2–S4 follow the same command format.)
 ```
 
-For local LLM inference, the project supports **Ollama** models:
+### **7. Plot results**
 
 ```
-ollama run llama3
-ollama run gemma3
-ollama run qwen3
+python S1/figures/plot_overview.py
+...
+(Here we use S1 as an example; S2–S4 follow the same command format.)
+
+python plots/plot_all_stages_overview.py
 ```
 
 ## Simulations / Demos
 
-Each stage (S1–S4) visually demonstrates the reasoning and coordination process of the proposed symbolic framework.  
-These visualizations are **illustrative demonstrations** rather than physical or dynamic simulations.  
-Their purpose is to **show how the symbolic reasoning pipeline scales** from a single robot to multi-agent collaboration under increasing coordination complexity.
+Each stage (S1–S4) provides an optional visual demonstration to illustrate
+ **how the symbolic reasoning pipeline operates** as task complexity increases.
+ These demos are **not physical or dynamic simulations** — their purpose is **only to visualize the logical structure of the tasks and the symbolic execution flow**.
 
-All reasoning, validation, and evaluation are performed purely at the **symbolic level** — no physics-based or trajectory-level simulation is involved.  
-The images below are representative snapshots generated from symbolic execution logs and plan visualizations.
+- The visualizations show object locations, robot poses, and key interaction slots
+   (e.g., the shared `Inspection.slot` in S3–S4).
+- They are rendered using PyBullet **purely as a static scene builder and camera tool**.
+- **No physics, collision handling, motion simulation, or dynamics** are used anywhere in the evaluation pipeline.
+
+All actual reasoning, plan execution, and evaluation are performed entirely within the **deterministic symbolic validator**, independent of PyBullet.
+ The demos simply help convey:
+
+- how tasks are structured at each stage,
+- how shared resources (e.g., inspection slot) constrain coordination,
+- how multi-robot relay patterns are represented symbolically.
+
+> **In short:**
+>  The demos are *illustrations of symbolic logic*, not simulations of robot motion.
 
 ---
 
@@ -211,7 +362,7 @@ Each stage can be customized by modifying its corresponding dataset and validati
 - **Llama 3**, **Gemma 3**, **Qwen 3** models
 - **Operating system:** Windows / Linux / macOS
 
-> The project is fully runnable on a local GPU (e.g., NVIDIA RTX 3080)
+> The project is fully runnable on a local GPU (e.g., NVIDIA RTX 4090)
 >  and does not require any cloud-based inference.
 
 ------
