@@ -1,9 +1,0 @@
-Task: Sequential cooperative task: RobotA first moves the red box from Shelf.red.slot to RedBin.slot, then RobotB moves the blue box from Shelf.blue.slot to BlueBin.slot.
-
-Two robots operate in strict sequence:
-- Step 1: RobotA moves first. It picks up the red box from Shelf.red.slot and places it into RedBin.slot.
-- Step 2: After RobotA finishes, RobotB moves the blue box from Shelf.blue.slot and places it into BlueBin.slot.
-
-Generate a valid plan in strict JSON format. The plan should include a list of steps like:
-{ "steps": [ {"agent": "robotA", "action": "base.goto", "target": "Shelf.front.dock"} ] }
-Only include valid actions defined in the environment (base.goto, arm.pick, arm.place).
