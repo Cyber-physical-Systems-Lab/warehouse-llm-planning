@@ -73,10 +73,13 @@ def evaluate_model(model):
         result = validate(world, plan, ACTIONS, {}, goal)
 
         total_cases += 1
-        if result.get("goal_ok") or result.get("ok"):
-            success_cases += 1
+        # First, check if the logic passes
         if result.get("logic_ok"):
             valid_cases += 1
+
+            # goal_ok is already defined by validator as logic_ok AND GoalSatisfied
+            if result.get("goal_ok"):
+                success_cases += 1
 
         # === Plan Similarity ===
         sims.append(compare_plans(gold, plan))
